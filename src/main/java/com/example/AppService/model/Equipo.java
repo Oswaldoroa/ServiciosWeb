@@ -14,5 +14,6 @@ public class Equipo {
     private  String nombreEquipo;
     private String paisOrigen;
     private  int anioFundacion;
+    private String categoria;
     private String liga;
 }

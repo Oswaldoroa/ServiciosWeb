@@ -8,6 +8,9 @@ public record EquipoRequest (
     @NotBlank(message = "El nombre del equipo es obligatorio")
     String nombreEquipo,
 
+    @NotBlank(message = "El pais de origen es obligatorio")
+    String paisOrigen,
+
     @Min(value = 1800,message = "El año tiene que ser valido")
     int anioFundacion,
 
