@@ -7,9 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/equipos")
+@RequestMapping("/api/v1/equipos")
 
 public class EquipoController {
     private final EquipoService service;
@@ -22,27 +23,28 @@ public class EquipoController {
         return service.listar();
     }
 
-    @GetMapping("/{nombreEquipo}")
-    public EquipoResponse obtener(@PathVariable String nombreEquipo) {
-        return service.obtener(nombreEquipo);
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EquipoResponse> obtener(@PathVariable UUID id) {
+        return ResponseEntity.ok(service.obtener(id));
     }
+
 
     @PostMapping
-    public EquipoResponse crear(@RequestBody EquipoRequest request) {
-        return service.crear(request);
+    public ResponseEntity<EquipoResponse> crear(@RequestBody EquipoRequest request) {
+        return ResponseEntity.ok(service.crear(request));
     }
 
-    @PutMapping("/{nombreEquipo}")
-    public EquipoResponse actualizar(
-            @PathVariable String nombreEquipo,
-            @RequestBody EquipoRequest request
-    ) {
-        return service.actualizar(nombreEquipo, request);
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EquipoResponse> actualizar(@PathVariable UUID id, @RequestBody EquipoRequest request) {
+        return ResponseEntity.ok(service.actualizar(id, request));
     }
 
-    @DeleteMapping("/{nombreEquipo}")
-    public ResponseEntity<Void> eliminar(@PathVariable String nombreEquipo) {
-        service.eliminar(nombreEquipo);
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable UUID id) {
+        service.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 

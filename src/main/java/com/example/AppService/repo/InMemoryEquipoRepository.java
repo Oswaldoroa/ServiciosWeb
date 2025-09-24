@@ -6,7 +6,7 @@ import  java.util.*;
 @Repository
 public class InMemoryEquipoRepository implements EquipoRepository {
 
-    private final Map<String, Equipo> equipos = new HashMap<>();
+    private final Map<UUID, Equipo> equipos = new HashMap<>();
 
     @Override
     public List<Equipo> findAll() {
@@ -14,18 +14,21 @@ public class InMemoryEquipoRepository implements EquipoRepository {
     }
 
     @Override
-    public Optional<Equipo> findByNombreEquipo(String nombreEquipo) {
-        return Optional.ofNullable(equipos.get(nombreEquipo));
+    public Optional<Equipo> findById(UUID id) {
+        return Optional.ofNullable(equipos.get(id));
     }
 
     @Override
-    public Equipo save(Equipo e) {
-        equipos.put(e.getNombreEquipo(), e);
-        return e;
+    public Equipo save(Equipo equipo) {
+        if (equipo.getId() == null) {
+            equipo.setId(UUID.randomUUID());
+        }
+        equipos.put(equipo.getId(), equipo);
+        return equipo;
     }
 
     @Override
-    public boolean deleteByNombreEquipo(String nombreEquipo) {
-        return equipos.remove(nombreEquipo) != null;
+    public boolean deleteById(UUID id) {
+        return equipos.remove(id) != null;
     }
 }
