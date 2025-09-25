@@ -11,3 +11,13 @@ public class AppServiceApplication {
 	}
 
 }
+
+//./mvnw spring-boot:run para correr
+
+/*
+		 "nombreEquipo":"S",
+        "paisOrigen":"D",
+        "anioFundacion": "D",
+        "categoria":"D",
+        "liga":"D"
+ */
